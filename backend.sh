@@ -1,3 +1,4 @@
+MYSQL_PASSWORD=$1
 log_file=/tmp/expense.log
 echo -e "\e[35mDisable Default Version of NodeJS\e[0m"
 dnf module disable nodejs -y &>>$log_file
@@ -39,5 +40,5 @@ echo -e "\e[35mInstall MySQL Client\e[0m"
 dnf install mysql -y &>>$log_file
 
 echo -e "\e[35mLoad Schema\e[0m"
-mysql -h mysql-dev.rdevopsb73.online -uroot -pExpenseApp@1 < /app/schema/backend.sql &>>$log_file
+mysql -h mysql-dev.rdevopsb73.online -uroot -p${MYSQL_PASSWORD} < /app/schema/backend.sql &>>$log_file
 
