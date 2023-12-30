@@ -1,4 +1,5 @@
 MYSQL_PASSWORD=$1
+component=backend
 
 source common.sh
 
@@ -22,23 +23,7 @@ Head "Adding Application User"
 useradd expense &>>$log_file
 echo $?
 
-Head "Remove existing App content"
-rm -rf /app &>>$log_file
-echo $?
-
-Head "Create Application Directory"
-mkdir /app &>>$log_file
-echo $?
-
-Head "Download Application Content"
-curl -o /tmp/backend.zip https://expense-artifacts.s3.amazonaws.com/backend.zip &>>$log_file
-echo $?
-
-cd /app
-
-Head "Extracting Application Content"
-unzip /tmp/backend.zip &>>$log_file
-echo $?
+App_Prereq "/app"
 
 Head "Downloading Application Dependencies"
 npm install &>>$log_file
