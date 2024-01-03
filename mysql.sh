@@ -1,4 +1,9 @@
 MYSQL_PASSWORD=$1
+if [ -z "$MYSQL_PASSWORD" ]; then
+  echo Input MYSQL_PASSWORD is missing
+  exit 1
+fi
+
 dnf module disable mysql -y
 cp mysql.repo /etc/yum.repos.d/mysql.repo
 
